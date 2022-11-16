@@ -35,7 +35,7 @@ void get_patient_info(){
 
     char rua[15];
 
-    printf("Digite o número da casa: \n);
+    printf("Digite o número da casa: \n");
     scanf("%s", rua);
 
     char bairro[15];
