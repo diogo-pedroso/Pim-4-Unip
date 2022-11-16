@@ -1,68 +1,62 @@
 #include<stdio.h>
 #include<string.h>
 
-void get_patient_info(){
-
+struct PatientInfo {
     char nome[20];
+    char cpf[11];
+    char nascimento[10];
+    char telefone[13];
+    char diagnostico[12];
+    char comorbidades[40];
+    char rua[15];
+    char bairro[15];
+    char cidade[15];
+    char estado[15];
+    char cep[12];
+    char email[20];
+};
+
+struct PatientInfo get_patient_info(){
+
+    struct PatientInfo info;
 
     printf("Digite o nome: ");
-    scanf("%s", nome);
-
-    char cpf[12];
+    scanf("%s", info.nome);
 
     printf("Insira o cpf: ");
-    scanf("%s", cpf);
-
-    char nascimento[10];
+    scanf("%s", info.cpf);
 
     printf("Digite a data de nascimento: ");
-    scanf("%s", nascimento);
-
-    char telefone[13];
+    scanf("%s", info.nascimento);
 
     printf("Digite o telefone: ");
-    scanf("%s", telefone);
-
-    char diagnostico[12];
+    scanf("%s", info.telefone);
 
     printf("Digite a data do diagnostico: ");
-    scanf("%s", diagnostico);
-
-    char comorbidades[40];
+    scanf("%s", info.diagnostico);
 
     printf("Insira qual comorbidade do paciente: ");
-    scanf("%s", comorbidades);
+    scanf("%s", info.comorbidades);
 
-    char rua[15];
-
-    printf("Digite o número da casa: \n");
-    scanf("%s", rua);
-
-    char bairro[15];
+    printf("Digite o número da casa: ");
+    scanf("%s", info.rua);
 
     printf("Digite o bairro: ");
-    scanf("%s", bairro);
-
-    char cidade[15];
+    scanf("%s", info.bairro);
 
     printf("Digite a cidade: ");
-    scanf("%s", cidade);
-
-    char estado[15];
+    scanf("%s", info.cidade);
 
     printf("Digite o estado: ");
-    scanf("%s", estado);
-
-    char CEP[12];
+    scanf("%s", info.estado);
 
     printf("Digite o CEP: ");
-    scanf("%s", CEP);
+    scanf("%s", info.cep);
 
+    printf("Digite o email: ");
+    scanf("%s", info.email);
 
-    char Email[20];
-
-    printf("Digite o Email: ");
-    scanf("%s", Email);
+    return info;
 }
 
 
@@ -97,5 +91,5 @@ int login(){
 
 int main(){
     while(login() == 0){}
-
+    struct PatientInfo info = get_patient_info();
 }
