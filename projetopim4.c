@@ -8,7 +8,7 @@ struct PatientInfo {
     char telefone[13];
     char diagnostico[12];
     char comorbidades[40];
-    char rua[15];
+    char endereco[15];
     char bairro[15];
     char cidade[15];
     char estado[15];
@@ -16,7 +16,44 @@ struct PatientInfo {
     char email[20];
 };
 
-struct PatientInfo get_patient_info(){
+void show_patient_info(struct PatientInfo info) {
+    printf("Nome: %s\n", info.nome);
+    printf("Cpf: %s\n", info.cpf);
+    printf("Data de Nascimento: %s\n", info.nascimento);
+    printf("Telefone: %s\n", info.telefone);
+    printf("Data do Diagnostico: %s\n", info.diagnostico);
+    printf("Comorbidade: %s\n", info.comorbidades);
+    printf("Endereço: %s; %s; %s; %s; %s\n", info.endereco, info.bairro, info.cidade, info.estado, info.cep);
+    printf("Email: %s\n", info.email);
+}
+
+void get_patient_info(){
+    struct PatientInfo info;
+    FILE *input_file = fopen("patients.dat", "r");
+
+    if(input_file == NULL) {
+        printf("NÃO FOI POSSÍVEL LER O ARQUIVO DE DADOS!!!");
+        return;
+    }
+
+    while(fread(&info, sizeof(struct PatientInfo), 1, input_file)) {
+        show_patient_info(info);
+    }
+}
+
+void save_to_file(struct PatientInfo patient_info){
+    FILE *output_file = fopen ("patients.dat", "a");
+
+    if(input_file == NULL) {
+        printf("NÃO FOI POSSÍVEL LER O ARQUIVO DE DADOS!!!");
+        return;
+    }
+
+    fwrite(&patient_info, sizeof(struct PatientInfo), 1, output_file);
+    fclose(output_file);
+}
+
+struct PatientInfo ask_patient_info(){
 
     struct PatientInfo info;
 
@@ -39,7 +76,7 @@ struct PatientInfo get_patient_info(){
     scanf("%s", info.comorbidades);
 
     printf("Digite o número da casa: ");
-    scanf("%s", info.rua);
+    scanf("%s", info.endereco);
 
     printf("Digite o bairro: ");
     scanf("%s", info.bairro);
@@ -91,5 +128,7 @@ int login(){
 
 int main(){
     while(login() == 0){}
-    struct PatientInfo info = get_patient_info();
+    struct PatientInfo info = ask_patient_info();
+    save_to_file(info);
+    get_patient_info();
 }
